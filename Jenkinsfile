@@ -4,8 +4,7 @@ pipeline {
     environment {
         AWS_EC2_INSTANCE = '18.206.147.213'
         
-        DOCKER_HUB_USERNAME = 'kamran111'
-        DOCKER_HUB_PASSWORD = 'Clvimp_25'
+        DOCKER_HUB_CREDENTIAL_ID = 'DOCKER_HUB_CREDENTIAL_ID'
         DOCKER_IMAGE_NAME = 'kamran111/react_django_demo_app'
         TAG = 'latest'
     }
@@ -29,8 +28,11 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    // Log in to Docker Hub
-                    sh "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
+                    
+                    withCredentials([usernamePassword(credentialsId: env.DOCKER_HUB_CREDENTIAL_ID, passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+                        sh "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
+                    }
+                    
                     // Tag the Docker image
                     sh "docker tag $DOCKER_IMAGE_NAME:$TAG $DOCKER_IMAGE_NAME"
                     // Push the Docker image to Docker Hub
