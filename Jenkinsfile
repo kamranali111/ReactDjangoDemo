@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        AWS_EC2_INSTANCE = '18.206.147.213'
+        AWS_EC2_INSTANCE = '3.85.118.205'
         
         DOCKER_HUB_CREDENTIAL_ID = 'DOCKER_HUB_CREDENTIAL_ID'
         DOCKER_IMAGE_NAME = 'kamran111/react_django_demo_app'
