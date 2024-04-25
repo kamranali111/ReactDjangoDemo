@@ -1,4 +1,4 @@
-# CI/CD Pipeline Demo Project and now we are testing it
+# CI/CD 
 
 ## Overview
 
